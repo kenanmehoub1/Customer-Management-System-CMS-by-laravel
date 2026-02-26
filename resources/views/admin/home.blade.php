@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>لوحة تحكم متكامله  </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      .container{
+        background-color:whitesmoke;
+        width: 100%;
+        display: flex;
+        transition: all 0.3s ease;
+        overflow: hidden;
+        position: relative;
+      }
+      
+      .menu{
+        background: rgba(195, 231, 242, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+        width: 20%;
+        
+        margin-left: 3%;
+        display: block;
+        
+        overflow: scroll;
+         scrollbar-width: thin;
+  scrollbar-color: #35d121 #f1f1f1;
+        border: solid rgb(143, 208, 255);
+         transition: all 0.3s ease;
+      }
+      
+      .menu.hidden {
+        width: 0;
+        margin-left: 0;
+    
+      overflow: visible;
+       transition: all 0.3s ease;
+      }
+
+      
+      
+      
+      .menu-left{
+       
+        height: 7rem;
+        position: relative;
+       
+      }
+      
+      .menu-top-button{
+        position: fixed;
+        right: 1%;
+        top: 5%;
+        margin-left: 2px;
+        border: none;
+        background: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
+      .menu-content{
+
+      }
+      .menu-content.hidden{
+        display: none;
+      }
+  
+      .list-group a{
+    text-decoration: none;
+    margin: 1rem;
+    margin-top: 2rem;
+      color: #586061;
+      }
+       .list-group li{
+  
+    
+    margin-top: 1rem;
+      }
+.title-menu{
+  margin-top: 15px;
+  margin-bottom: 15px;
+display: flex;
+justify-content: space-between;
+overflow:auto;
+
+}
+.options {
+  max-height: fit-content; /* ارتفاع مناسب لقائمتك */
+  opacity: 1;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  
+}
+
+.options.hidden {
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.options1 {
+  max-height: fit-content; /* ارتفاع مناسب لقائمتك */
+  opacity: 1;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.options1.hidden {
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+   .content{
+    width: 97%;
+    margin-left: 3%;
+    position: relative;
+    
+    display: block;
+    justify-content: end;
+    
+    
+    
+   }
+      .menu.hidden + .content {
+        width: 97%;
+      }
+  
+.top-header{
+  position: absolute;
+  top: 2%;
+  left: 1%;
+   z-index: 1;
+width: 13rem;
+height: 3rem;
+
+border: solid 0.3px rgb(99, 172, 220);
+border-radius: 5%;
+
+
+display: flex;
+justify-content: space-around;
+align-items: center;
+
+}
+    .img1{
+      
+      width: 30px;
+      height: 30px;
+      border-radius: 20%;
+    }
+/*  عنصر وهمي  */
+.whm{
+
+  width: 100%;
+  height: 4rem;
+ margin: 1rem;
+}
+/* نهاية عنصر وهمي*/
+.logout{
+    width: 200px;
+    height: 0px;
+      background-color: #808485a0;
+      border-radius: 5%;
+      position: absolute;
+  top: 5.2%;
+  left: 1%;
+  display: flex;
+justify-content: center;
+align-items: center;
+  z-index: 3;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+.logout.show{
+ height: 80px;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+.logout a{
+      color:rgba(190, 6, 6, 1) ;
+  text-decoration: none;
+  background-color: whitesmoke;
+ padding: 0.5rem 1rem;
+ width: 150px;
+ display: inline-block;
+ text-align: center;
+  border: solid 0.3px rgb(47, 220, 247);
+  border-radius: 8px;
+}
+
+
+    .header{
+      margin-top: 1rem;
+     
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn-header{
+      display: none;
+    }
+    .btn-help{
+        display: none;
+    }
+.nav-links{
+  
+  display: flex;
+  justify-content: space-between;
+}
+.nav-links li{
+  margin-left: 0.5rem;
+  list-style-type: none;
+  
+}
+.nav-links li a {
+  color:rgb(47, 220, 247) ;
+  text-decoration: none;
+  background-color: whitesmoke;
+ padding: 0.5rem 2rem;
+  border: solid 0.3px rgb(47, 220, 247);
+  border-radius: 8px;
+}
+  /*   زر التنشيطCSS */
+.switch-container {
+  color: rgb(47, 220, 247);
+  margin-left: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 34px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.4s;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+/* عند التفعيل */
+.switch input:checked + .slider {
+  background-color: rgb(47, 220, 247);
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(24px);
+}
+
+ /*   زر التنشيط نهايةCSS */
+
+ .first-div{
+  margin-top: 1rem;
+  border:solid 0.3px #2196F3 ;
+  
+  border-radius: 8px;
+
+
+ }
+
+/*  بداية زر السحب والافلات*/
+    .upload-area {
+            width: 500px;
+            height: 150px;
+            border: 3px dashed #4a90e2;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background-color: #f1f19caa;
+            margin: 20px auto;
+            padding: 20px;
+           margin-top: 2rem;
+           margin-bottom: 2rem;
+        }
+        
+        .upload-area:hover, .upload-area.dragover {
+            background-color: #e3f2fd;
+            border-color: #1565c0;
+        }
+        
+      
+        
+        .upload-text {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .browse-btn {
+            
+            color: #357abd;
+            border: none;
+            padding: 10px 20px;
+            
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        
+        .browse-btn:hover {
+            color: #11e218;
+        }
+        
+        #fileInput {
+            display: none;
+        }
+        
+       
+        /*   نهاية زر السحب والافلات*/
+
+        /* الخانات*/
+        .form-grid {
+          margin: 1rem;
+            display: grid;
+            grid-template-columns: repeat(2, 2fr);
+            gap: 20px;
+        }
+        
+        .form-row {
+            display: contents;
+        }
+        
+        .form-group {
+            margin: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 0.3px solid #3498db;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+            outline: none;
+        }
+        
+.phone-input-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+}
+
+.country-code-select {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 30%;
+    border: 1px solid #ddd;
+    border-left: none;
+    background: #f9f9f9;
+    border-radius: 0 4px 4px 0;
+}
+
+.phone-number-input {
+    width: 100%;
+    padding-right: 30%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+        .password-container {
+            position: relative;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+        
+        .image-upload {
+            grid-column: 1 / -1;
+            border: 2px dashed #3498db;
+            border-radius: 10px;
+            padding: 40px 20px;
+            text-align: center;
+            margin: 20px 0;
+            background-color: #f8fafc;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .image-upload:hover {
+            background-color: #e8f4fc;
+        }
+        
+        .image-upload i {
+            font-size: 48px;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+        
+        .image-upload p {
+            font-size: 18px;
+            color: #3498db;
+            font-weight: 600;
+        }
+        
+      
+        /*نهاية الخانات*/
+
+@media (max-width:990px) {
+  .container{
+        
+      
+      }
+      .menu
+      {
+        width: 100%;
+        margin-left: 0;
+          z-index: 10;
+      }
+      .content{
+        width: 0;}
+      
+        .menu.hidden + .content {
+        width: 100%;
+      }
+    
+      .menu-left{
+        
+        height: 7rem;
+        position: relative;
+       
+      }
+      
+      .menu-top-button{
+        position: absolute;
+        right: 10px;
+        top: 5%;
+        
+        border: none;
+        background: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
+
+      .title-menu{
+margin: 1rem;
+
+}
+
+.content-header{
+  display: flex;
+  justify-content: space-between;
+  
+   position: relative;
+   transition: all 0.3s ease;
+}
+.btn-header{
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  width: 3rem;
+  height: 3rem;
+  margin: 0;
+  border:none;
+  background:none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1;
+  display: block;
+}
+.btn-help{
+    margin: 1rem;
+   width: 1px;
+    height: 1px;
+    display: block;
+}
+.header{
+      margin: 1rem;
+       height: 0;
+    
+      display: block;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      opacity: 0;
+    }
+    .header.show{
+     height: 280px;
+     opacity: 1;
+      transition: all 0.3s ease;
+    }
+
+
+
+
+    .header h1{
+      font-size: x-large;
+      margin-right: 4%;
+    }
+.nav-links{
+  margin-right: 4%;
+ margin-top: 4px;
+  display: block;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-links li{
+  margin: 0.5rem;
+  list-style-type: none;
+ 
+}
+.nav-links li a {
+  color:rgb(47, 220, 247) ;
+  text-decoration: none;
+  background-color: whitesmoke;
+ padding: 0.5rem 1rem;
+ width: 150px;
+ display: inline-block;
+ text-align: center;
+  border: solid 0.3px rgb(47, 220, 247);
+  border-radius: 8px;
+}
+
+.menu-content{
+  font-size: x-large;
+  
+}
+
+.upload-area {
+  width: 250px;  
+
+}
+    }
+ 
+
+    
+    </style>
+</head>
+<body>
+    
+<div class="container">
+  <button class="menu-top-button" onclick="toggleMenu()"><i class="fas fa-chevron-right"></i></button>
+    <div class="menu">
+        <!--زر قائمه منسدلة نحو اليمين الرئيسية-->
+        <div class="menu-left">
+             
+        </div>
+        <!-- محتوى القائمة الإضافي -->
+        <div class="menu-content">
+           <div class="title-menu">
+            <h3 >التطبيق </h3>
+<button style="border: none; cursor: pointer;" class="selected" onclick="toggleTitleMenu()"><i class="fas fa-chevron-down"></i></button>
+ 
+</div>
+
+  <div class="options">
+
+
+<ul class="list-group">
+  <li class="list-group-item"><a href="#"><i class="fas fa-users" style="color: #3498db;"></i> عرض جميع العملاء </a></li>
+    <li class="list-group-item"><a href="{{url('/admin/home/'.$admin->id)}}"><i class="fas fa-user-tie" style="color: #1fd7fbff;"></i> إضافة عميل جديد</a></li>
+    <li class="list-group-item"><a href="#"><i class="fas fa-home" style="color: #e74c3c;"></i> الرئيسية</a></li>
+    
+    <li class="list-group-item"><a href="#"><i class="fas fa-comment" style="color: #f39c12;"></i> الواجهات الترحيبية</a></li>
+    <li class="list-group-item"><a href="#"><i class="fas fa-bell" style="color: #d35400;"></i> إشعارات ورسائل</a></li>
+    <li class="list-group-item"><a href="#"><i class="fas fa-clock" style="color: #7f8c8d;"></i> منتهي الصلاحيه</a></li>
+    <li class="list-group-item"><a href="#"><i class="fas fa-box" style="color: #27ae60;"></i> باقات اللإشتراك </a></li>
+    <li class="list-group-item"><a href="#"><i class="fas fa-sticky-note" style="color: #16a085;"></i> ملاحظات قبل الفاتورة </a></li>
+    <li class="list-group-item"><a href="#"><i class="fas fa-icons" style="color: #e84393;"></i> ايقونات </a></li>
+    <li class="list-group-item"><a href="#"><i class="fas fa-tags" style="color: #e67e22;"></i> الاسعار </a></li>
+    <li class="list-group-item"><a href="#"><i class="fas fa-share-alt" style="color: #2980b9;"></i> التواصل الاجتماعي </a></li>
+    <li class="list-group-item"><a href="#"><i class="fas fa-info-circle" style="color: #34495e;"></i> حول التطبيق </a></li>
+    <li class="list-group-item"><a href="#"><i class="fas fa-trash" style="color: #c0392b;"></i> المحذوفات </a></li>
+</ul>
+</div>
+
+<div class="title-menu">
+<h3 >الإدارة </h3>
+
+<button style="border: none; cursor:pointer;" class="selected1" onclick="toggleTitleMenu1()"><i class="fas fa-chevron-down"></i></button>
+</div>
+<div class="options1">
+
+<ul class="list-group">
+    <li class="list-group-item"><a href="#"><i class="fas fa-chart-bar" style="color: #27ae60;"></i> التقارير</a></li>
+    <li class="list-group-item"><a href="#"><i class="fas fa-user-tie" style="color: #8e44ad;"></i> الموظفين</a></li>
+    <li class="list-group-item"><a href="#"><i class="fab fa-whatsapp" style="color: #25D366;"></i> أرقام الواتس</a></li>
+    <li class="list-group-item"><a href="#"><i class="fas fa-cloud-download-alt" style="color: #3498db;"></i> النسخ الإحتياطية </a></li>
+</ul>
+</div>
+        </div>
+    </div>
+    <div class="content">
+      <div class="top-header">
+        <a href="#"><i class="fas fa-bell" style="color: white; text-shadow: 0 0 5px blue, 0 0 10px blue;"></i>
+              </a>
+        <a href="#"  style="text-decoration: none;"> <h4>{{$admin->name}}</h4></a>
+         <a href="#"><img src="{{ asset('/'.$admin->profile_photo) }}" alt="" class="img1"></a>
+        <button style="border: none; cursor:pointer;" class="selected1" onclick="togglelogout()"><i class="fas fa-chevron-down"></i></button>
+      </div>
+     
+    <div class="whm"></div>
+     <div class="logout"><a href="{{url('admin/logout')}}" >Log out</a></div>
+      <div class="content-header">
+        <div class="header">
+          <h1>{{$admin->name}}</h1>
+          
+                  <ul class="nav-links" id="navLinks">
+                   <li> <!-- HTML -->
+                     <label class="switch-container text-info">
+                              نشط
+                     <label class="switch">
+                     <input type="checkbox">
+                     <span class="slider"></span>
+                     </label>
+                     </label> 
+                     </li>
+                       <li ><a href="#"class="text-info1" style="background: rgb(47, 220, 247);color: white;">حفظ</a></li>
+                       <li><a href="#" class="text-info2">حفظ وإضافةأخر</a></li>
+                       <li><a href="#"class="text-info1">إلغاء</a></li>
+                       <li ><a href="#"class="text-info1" style="background: #f6061a;color: white;">حذف </a></li>
+                 </ul>
+                 </div>
+             <button class="btn-header" onclick="btnHeader()" >
+        <i class="fas fa-bars"></i>
+    </button>
+        
+      </div>
+      <div class="btn-help"></div>
+
+      
+        <div class="first-div">
+        <div class="upload-area" id="uploadArea">
+        
+        <p class="upload-text">اسحب الصورة هنا أو انقر <a class="browse-btn">لتحميل</a></p>
+        
+        <input type="file" id="fileInput" name="file_input" multiple>
+    </div>
+    
+      
+      
+<form id="clientForm">
+            <div class="form-grid">
+                <!-- الصف الأول -->
+                <div class="form-group">
+                    <label for="clientName">اسم العميل</label>
+                    <input type="text" name="client_name" required>
+                </div>
+                
+             <div class="form-group">
+    <label for="phoneNumber">رقم الهاتف</label>
+    <div class="phone-input-container">
+        <select name="country_code" id="countryCode" class="country-code-select">
+            <option value="+966">+966</option>
+            <option value="+971">+971</option>
+            <option value="+965">+965</option>
+            <option value="+973">+973</option>
+            <option value="+974">+974</option>
+            <option value="+968">+968</option>
+            <option value="+20">+20</option>
+            <option value="+962">+962</option>
+        </select>
+        <input type="tel" id="phoneNumber" name="phone_number" class="phone-number-input" required>
+    </div>
+</div>
+                
+                <div class="form-group">
+                    <label for="password">كلمة السر</label>
+                    <div class="password-container">
+                        <input type="password"  name="password" id="password" required>
+                        <button type="button" class="toggle-password" id="togglePassword">👁️</button>
+                    </div>
+                </div>
+                
+                <!-- الصف الثاني -->
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" name="email"  required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gender">الجنس</label>
+                    <select id="gender" name="gender" required>
+                        
+                        <option value="male">ذكر</option>
+                        <option value="female">أنثى</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="workType">نوع الدورة التدريبية</label>
+                    <select id="workType" name="work_type" required>
+                    
+                        <option value="Python">Python</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="Java">Java</option>
+                        <option value="c++">c++</option>
+                        <option value="php">php</option>
+                       
+                    </select>
+                </div>
+                
+                <!-- الصف الثالث -->
+                <div class="form-group">
+                    <label for="country">الدولة</label>
+                    <select id="country"  name="country" required>
+                        <option value="sa">المملكة العربية السعودية</option>
+                        <option value="ae">الإمارات العربية المتحدة</option>
+                        <option value="kw">الكويت</option>
+                        <option value="bh">البحرين</option>
+                        <option value="qa">قطر</option>
+                        <option value="om">عمان</option>
+                        <option value="eg">مصر</option>
+                        <option value="jo">الأردن</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="state">المحافظة</label>
+                    <select id="state"  name="state" required>
+                        <option value="">اختر المحافظة</option>
+                    </select>
+                </div>
+                       
+                <div class="form-group">
+                    <label for="start_date">تاريخ الاشتراك</label>
+                    <input type="date" name="start_date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="endDate">تاريخ الانتهاء</label>
+                    <input type="date" name="end_date" required>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label for="addedBy">أضيف بواسطة</label>
+                    <input type="text" name="added_by" required>
+                </div>
+            </div>
+            
+       
+        </form>
+
+
+      </div>
+
+
+
+      </div>
+  
+</div>
+
+<script>
+   function toggleMenu() {
+    // اختيار العناصر من الصفحة
+    const menu = document.querySelector('.menu');
+    const x    = document.querySelector('.menu-top-button');
+    const ul1  = document.querySelector('.menu-content');
+    // تبديل حالة القائمة (إظهار/إخفاء)
+    menu.classList.toggle('hidden');
+    
+    ul1.classList.toggle('hidden');
+if(menu.classList.contains('hidden')){
+  x.innerHTML='<i class="fas fa-chevron-left"></i>';
+}else{
+x.innerHTML='<i class="fas fa-chevron-right"></i>';
+}
+
+
+    }
+</script>
+<script>
+   function toggleTitleMenu() {
+    // اختيار العناصر من الصفحة
+    const TitleMenu = document.querySelector('.options');
+     const x    = document.querySelector('.selected');
+   
+    // تبديل حالة القائمة (إظهار/إخفاء)
+    TitleMenu.classList.toggle('hidden');
+    
+    if(TitleMenu.classList.contains('hidden')){
+  x.innerHTML='<i class="fas fa-chevron-up"></i>';
+}else{
+x.innerHTML='<i class="fas fa-chevron-down"></i>';
+}
+
+
+
+    }
+</script>
+
+<script>
+   function toggleTitleMenu1() {
+    // اختيار العناصر من الصفحة
+    const TitleMenu = document.querySelector('.options1');
+     const x    = document.querySelector('.selected1');
+   
+    // تبديل حالة القائمة (إظهار/إخفاء)
+    TitleMenu.classList.toggle('hidden');
+    
+    if(TitleMenu.classList.contains('hidden')){
+  x.innerHTML='<i class="fas fa-chevron-up"></i>';
+}else{
+x.innerHTML='<i class="fas fa-chevron-down"></i>';
+}
+
+
+
+    }
+</script>
+
+<script>
+   function btnHeader() {
+    // اختيار العناصر من الصفحة
+    const btn = document.querySelector('.header');
+     
+   
+    // تبديل حالة القائمة (إظهار/إخفاء)
+    btn.classList.toggle('show');
+    
+
+
+
+
+    }
+</script>
+<script>
+   function togglelogout() {
+    // اختيار العناصر من الصفحة
+    const logout = document.querySelector('.logout');
+     
+   
+    // تبديل حالة القائمة (إظهار/إخفاء)
+    logout.classList.toggle('show');
+    
+
+
+
+
+    }
+</script>
+<!-- بداية سكربت زر سحب وافلات-->
+<script>
+    const uploadArea = document.getElementById('uploadArea');
+const fileInput = document.getElementById('fileInput');
+
+// النقر لفتح اختيار الملفات
+uploadArea.addEventListener('click', () => fileInput.click());
+
+// منع السلوك الافتراضي في أحداث السحب
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(event => {
+    uploadArea.addEventListener(event, e => {
+        e.preventDefault();
+        e.stopPropagation();
+    });
+});
+
+// السحب والإفلات
+uploadArea.addEventListener('drop', e => {
+    fileInput.files = e.dataTransfer.files;
+});
+    </script>
+    <!-- نهاية زر سحب وافلات-->
+
+    <!-- بداية سكربيت خانات الادخال كاملا-->
+
+
+   <script>
+    // كود لإظهار/إخفاء كلمة السر
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('password');
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.textContent = type === 'password' ? '👁️' : '🙈';
+    });
+    
+    // كود لتحديث المحافظات بناءً على الدولة المختارة
+    document.addEventListener('DOMContentLoaded', function() {
+        const countrySelect = document.getElementById('country');
+        const stateSelect = document.getElementById('state');
+        
+        // بيانات المحافظات لكل دولة
+        const states = {
+            'sa': ['الرياض', 'مكة المكرمة', 'المدينة المنورة', 'الشرقية', 'عسير', 'تبوك', 'حائل', 'الحدود الشمالية', 'الجوف', 'نجران', 'الباحة', 'الجوف'],
+            'ae': ['أبو ظبي', 'دبي', 'الشارقة', 'عجمان', 'أم القيوين', 'رأس الخيمة', 'الفجيرة'],
+            'kw': ['العاصمة', 'حولي', 'الفروانية', 'الجهراء', 'مبارك الكبير', 'الأحمدي'],
+            'bh': ['المنامة', 'المحرق', 'الشمالية', 'الجنوبية', 'الوسطى'],
+            'qa': ['الدوحة', 'الريان', 'أم صلال', 'الخور', 'الوكرة', 'الضعاين', 'الشحانية'],
+            'om': ['مسقط', 'ظفار', 'مسندم', 'البريمي', 'الوسطى', 'الشرقية', 'الداخلية', 'الباطنة'],
+            'eg': ['القاهرة', 'الإسكندرية', 'الجيزة', 'الشرقية', 'الدقهلية', 'البحر الأحمر', 'أسوان', 'الأقصر'],
+            'jo': ['عمان', 'إربد', 'الزرقاء', 'مأدبا', 'العقبة', 'الكرك', 'معان', 'الطفيلة']
+        };
+        
+        // دالة لتحديث المحافظات
+        function updateStates() {
+            const country = countrySelect.value;
+            stateSelect.innerHTML = '<option value="">اختر المحافظة</option>';
+            
+            if (states[country]) {
+                states[country].forEach(state => {
+                    const option = document.createElement('option');
+                    option.value = state;
+                    option.textContent = state;
+                    stateSelect.appendChild(option);
+                });
+            }
+        }
+        
+        // إضافة المستمع للحدث
+        countrySelect.addEventListener('change', updateStates);
+        
+        // تحديث أولي عند تحميل الصفحة
+        updateStates();
+    });
+</script>
+
+    <!-- نهاية سكربيت خانات الادخال كاملا-->
+</body>
+</html>
